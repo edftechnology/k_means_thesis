@@ -1,5 +1,5 @@
 import numpy as np
-import sortear_sementes as ss
+import functions.sortear_sementes as ss
 
 def k_means(num_de_k_inicial, K, sementes, num_max_I):
     """
@@ -89,7 +89,7 @@ def k_means(num_de_k_inicial, K, sementes, num_max_I):
                     # k_min = Índice do medioide m_k de menor distância
 
                     k_min = distancias.tolist()[i].index(min(distancias[i, :]))
-                    print(i) # Adicionado
+                    # print(i) # Adicionado
 
                     ks_min[i, 0] = k_min
 
@@ -140,7 +140,6 @@ def k_means(num_de_k_inicial, K, sementes, num_max_I):
 
             I = I + 1
 
-    # EDEN VC PAROU AQUI!
     # calcular a distância entre o elemento e o novo medioide
     for i in range(0, n, 1):
         # para todos os $ k $-clusters

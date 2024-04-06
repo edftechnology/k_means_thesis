@@ -34,7 +34,7 @@ def gerar_grafico_elbow_data(endereco,
 
     # Atualizar parâmetros para todos os gráficos
     plt.rcParams.update({"text.usetex": True,
-                         "text.latex.unicode": True,
+                        #  "text.latex.unicode": True,
                          "font.size": 12,
                          "font.family": "Book Antiqua",
                          "figure.dpi": 100,
@@ -72,7 +72,7 @@ def gerar_grafico_elbow_data(endereco,
 
     # Maximizar a imagem
     figManager = plt.get_current_fig_manager()
-    figManager.window.showMaximized()
+    # figManager.window.showMaximized()
 
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
@@ -80,8 +80,8 @@ def gerar_grafico_elbow_data(endereco,
     plt.tight_layout() # Ajustar o gráfico na figura
 
 
-    endereco = "resultados_computacionais\\elbow_data_chart_" \
-               + endereco + str(K) + ".jpg"
+    endereco = "outputs/" + endereco + "/" + endereco + "_elbow_data_chart_" + \
+        str(K) + ".jpg"
     fig.savefig(endereco, dpi=100)
 
 # print(gerar_grafico_elbow_data(endereco,

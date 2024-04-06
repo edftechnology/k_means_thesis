@@ -7,47 +7,42 @@ Trabalho de Graduação em Engenharia III
 Data de Criação: 06/03/2018
 Data da última modificação: 28/09/2018
 """
-# REVISÃO(ÕES): --------
+# REVISÃO(ÕES): ---
 
-# REFERÊNCIA(S): -------------------------------------------------------------------------------------------------------
-
-# [1] MacQueen.
-# [2] Ricieri
-# [3] Livros de Python
-
-# FUNÇÃO DO APLICATIVO: ------------------------------------------------------------------------------------------------
+# FUNÇÃO DO APLICATIVO: ---
 
 # Função: classificar.
 
-# PACOTE(S): -----------------------------------------------------------------------------------------------------------
+# PACOTE(S): ---
 
 import time as time
 import numpy as np
 import pandas as pd
 import os as os
 import pickle as pkl
-import validacoes_das_variaveis as vv
-import k_means as km
-import gerar_grafico_elbow_data as ed
-import gerar_relatorio_em_planilha as re
-import gerar_grafico_dendrograma as de
-import winsound as winsound
+import functions.validacoes_das_variaveis as vv
+import functions.k_means as km
+import functions.gerar_grafico_elbow_data as ed
+import functions.gerar_relatorio_em_planilha as re
+import functions.gerar_grafico_dendrograma as de
+# Comenteri para poder ser executado em Sistemas Operacionais Linux:
+# import winsound as winsound
 
-# CARREGAMENTO, ARMAZENAMENTO E MANIPULAÇÃO DO DADOS: ------------------------------------------------------------------
+# CARREGAMENTO, ARMAZENAMENTO E MANIPULAÇÃO DO DADOS: ---
 
-# endereco = "banco_de_dados\\tres_ponto_um.xlsx"
-# endereco = "banco_de_dados\\quatro_ponto_um.xlsx"
-# endereco = "banco_de_dados\\seis_ponto_um.xlsx"
-# endereco = "banco_de_dados\\aeronaves_civis.xlsx"
-# endereco = "banco_de_dados\\aeronaves_civis_arbitrado.xlsx"
-# endereco = "banco_de_dados\\aeronaves_militares.xlsx"
-# endereco = "banco_de_dados\\aeronaves_militares_arbitrado.xlsx"
-# endereco = "banco_de_dados\\turbinas_60_licoes.xlsx"
-# endereco = "banco_de_dados\\foguetes.xlsx"
-endereco = "banco_de_dados\\OS9216_18032020-A_alterado.xlsm"
+# endereco = "databases/tres_ponto_um.xlsx"
+# endereco = "databases/quatro_ponto_um.xlsx"
+# endereco = "databases/seis_ponto_um.xlsx"
+# endereco = "databases/aeronaves_civis.xlsx"
+# endereco = "databases/aeronaves_civis_arbitrado.xlsx"
+# endereco = "databases/aeronaves_militares.xlsx"
+# endereco = "databases/aeronaves_militares_arbitrado.xlsx"
+# endereco = "databases/turbinas_60_licoes.xlsx"
+# endereco = "databases/foguetes.xlsx"
+# endereco = "databases/OS9216_18032020-A_alterado.xlsm"
+# endereco =  "databases/hubglobe.xlsx"
 
-endereco =  "banco_de_dados/hubglobe.xlsx"
-
+endereco = "databases/injetores_l25.xlsx"
 
 banco_de_dados = pd.read_excel(endereco,
                                sheet_name=0)
@@ -69,14 +64,19 @@ bd_auxiliar = \
 # "Data de Entrada de Operação"
 # bd_auxiliar = \
 #     bd_auxiliar.drop(bd_auxiliar.columns[0], axis = 1)
+
+print("---")
+print("DADO(S):")
+print("")
 print(bd_auxiliar.head())
 
+print("")
 print(bd_auxiliar.shape)
 
-# VARIÁVEL(IS): --------------------------------------------------------------------------------------------------------
+# VARIÁVEL(IS): ---
 
-print("-----------")
-print("VARIÁVEL(IS):")
+print("---")
+print("\nVARIÁVEL(IS):")
 print("")
 
 # sementes = Sementes do BIG Data
@@ -106,30 +106,30 @@ if K >= porcentagem * n:
 print("Número total K de k-clusters =", K)
 
 # num_max_I = Número máximo de iterações
-num_max_I = input("Digitar o 'Número total de iterações' = ")
+num_max_I = input("\nDigitar o 'Número total de iterações' = ")
 descricao = "Número total de iterações"
 num_max_I = \
     vv.validar_variavel_inteira_nao_negativa(num_max_I, descricao)
 print("Número máximo de iterações =", num_max_I)
 
-num_de_k_inicial = input("Digitar o 'Número do k Inicial' = ")
-descricao = "Número do k Inicial"
+num_de_k_inicial = input("\nDigitar o 'Número do k inicial' = ")
+descricao = "Número do k inicial"
 num_de_k_inicial = \
     vv.validar_variavel_inteira_nao_negativa(num_de_k_inicial, descricao)
 if num_de_k_inicial <= 1 or num_de_k_inicial > K:
     print("Espeficique um valor de "
-          "'Número do k Inicial' maior que 1 (um)"
+          "'Número do k inicial' maior que 1 (um)"
           "e menor que o 'Número Total K de k-clusters'.")
     quit()
 print("Número do k Inicial =", num_de_k_inicial)
 
-titulo_do_eixo_x_do_dendrograma = input("Digitar o "
+titulo_do_eixo_x_do_dendrograma = input("\nDigitar o "
                                         "'Título do Eixo x do Dendrograma': ")
 
-# CÁLCULO(S): ----------------------------------------------------------------------------------------------------------
+# CÁLCULO(S): ---
 
 tempo_inicio = time.time()
-tempo_inicio_CPU = time.clock()
+tempo_inicio_CPU = time.perf_counter()
 
 # os medioides_otimos devem ser um arranjo
 medioides_otimos_lista = []
@@ -144,20 +144,18 @@ for k in range(num_de_k_inicial, K + 1, 1):
     ks_min_otimos_lista.append(ks_min_otimos)
     WSs_total_otimo_lista.append(WS_total_otimo)
 
-    print("k_atual = ", k)
+    # RESULTADO(S): ---
 
-# RESULTADO(S): --------------------------------------------------------------------------------------------------------
-
-    print("----------")
+    print("\n---")
     print("RESULTADO(S) PARA k =", k, ":")
     print("")
 
-    print("Medioides ótimos:")
-    print(medioides_otimos_lista)
-    print("")
+    # print("Medioides ótimos:")
+    # print(medioides_otimos_lista)
+    # print("")
 
     # Gerar relatório em planilha:
-    endereco = endereco.replace("banco_de_dados\\", "")
+    endereco = endereco.replace("databases/", "")
     endereco = endereco.replace(".xlsx", "_")
     re.gerar_relatorio_em_planilha(endereco,
                                    banco_de_dados,
@@ -165,10 +163,10 @@ for k in range(num_de_k_inicial, K + 1, 1):
                                    ks_min_otimos,
                                    k)
 
-    print("")
-    print("WS total ótimo:")
-    print(WSs_total_otimo_lista)
-    print("")
+    # print("")
+    # print("WS total ótimo:")
+    # print(WSs_total_otimo_lista)
+    # print("")
 
     # Gráfico(s):
 
@@ -182,37 +180,35 @@ for k in range(num_de_k_inicial, K + 1, 1):
     # o programa para gerar is elbow data charts para cada valor
     # de população
 
+    if endereco.endswith("_") == True:
+        endereco = endereco[:-1]
     endereco_antigo = endereco
-    endereco = endereco + str(populacao) + "_"
-
     de.gerar_grafico_dendrograma(endereco,
                                  banco_de_dados,
                                  distancias_otimas,
                                  k,
                                  populacao,
                                  titulo_do_eixo_x_do_dendrograma)
-
     endereco = endereco_antigo
 
 # Plotar o Elbow Data Chart:
-
-endereco = endereco.replace("banco_de_dados\\", "")
-endereco = endereco + str(n) + "_"
 
 ed.gerar_grafico_elbow_data(endereco,
                             num_de_k_inicial,
                             K,
                             WSs_total_otimo_lista)
 
-frequencia = 2500 # (Hertz)
-duracao = 1000 # (ms)
-winsound.Beep(frequencia, duracao)
+# Comenteri para poder ser executado em Sistemas Operacionais Linux:
+# frequencia = 2500 # (Hertz)
+# duracao = 1000 # (ms)
+# winsound.Beep(frequencia, duracao)
 
+print("\n---")
 tempo_fim = time.time() - tempo_inicio
-tempo_fim_CPU = time.clock() - tempo_inicio_CPU
-print("----------")
-print("O tempo de execução da aplicação é =",
-      round(tempo_fim, 2), "s")
+tempo_final_CPU = time.perf_counter()
+print(f"Tempo de execução: {tempo_fim} segundos")
+print(f"Tempo de execução: {tempo_final_CPU - tempo_inicio_CPU} segundos")
+
 
 # Os objetos estão sendo salvos para NÃO ter que executar
 # todo o código novamente, simplemente para executar
@@ -228,3 +224,9 @@ with open("objetos.pkl", "wb") as f:
               populacao,
               ks_min_otimos],
              f)
+
+# REFERÊNCIA(S): ---
+
+# [1] MacQueen.
+# [2] Ricieri
+# [3] Livros de Python
