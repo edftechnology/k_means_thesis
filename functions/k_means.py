@@ -4,11 +4,13 @@ import functions.sortear_sementes as ss
 def k_means(num_de_k_inicial, K, sementes, num_max_I):
     """
 
-    :param num_de_k_inicial: Número de k inicial
-    :param K: Número total de k-clusters
-    :param sementes: Sementes do BIG Data
-    :param num_max_I: Número máximo de iterações
-    :return: Medioides ótimos, posição mais próxima do medioide ótimo e WSs total ótimos
+    :param num_de_k_inicial: Número de k inicial. int.
+    :param K: Número total de k-clusters. int
+    :param sementes: Sementes do BIG Data. float.
+    :param num_max_I: Número máximo de iterações. int.
+    
+    :return: Medioides ótimos, posição mais próxima do 
+    medioide ótimo e WSs total ótimos
     """
 
     # I = Iteração

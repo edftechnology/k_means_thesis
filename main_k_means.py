@@ -25,7 +25,7 @@ import functions.k_means as km
 import functions.gerar_grafico_elbow_data as ed
 import functions.gerar_relatorio_em_planilha as re
 import functions.gerar_grafico_dendrograma as de
-# Comenteri para poder ser executado em Sistemas Operacionais Linux:
+# Comentei para poder ser executado também em Sistemas Operacionais Linux:
 # import winsound as winsound
 
 # CARREGAMENTO, ARMAZENAMENTO E MANIPULAÇÃO DO DADOS: ---
@@ -33,16 +33,14 @@ import functions.gerar_grafico_dendrograma as de
 # endereco = "databases/tres_ponto_um.xlsx"
 # endereco = "databases/quatro_ponto_um.xlsx"
 # endereco = "databases/seis_ponto_um.xlsx"
-# endereco = "databases/aeronaves_civis.xlsx"
-# endereco = "databases/aeronaves_civis_arbitrado.xlsx"
-# endereco = "databases/aeronaves_militares.xlsx"
-# endereco = "databases/aeronaves_militares_arbitrado.xlsx"
+# endereco = "databases/aeronaves_civis_sem_data_de_entrada_de_operacao.xlsx"
+# endereco = "databases/aeronaves_civis_arbitrado_sem_data_de_entrada_de_operacao.xlsx"
+# endereco = "databases/aeronaves_militares_sem_data_de_entrada_de_operacao.xlsx"
+# endereco = "databases/aeronaves_militares_arbitrado_sem_data_de_entrada_de_operacao.xlsx"
 # endereco = "databases/turbinas_60_licoes.xlsx"
 # endereco = "databases/foguetes.xlsx"
-# endereco = "databases/OS9216_18032020-A_alterado.xlsm"
-# endereco =  "databases/hubglobe.xlsx"
 
-endereco = "databases/injetores_l25.xlsx"
+endereco = "databases/.injetores_l25.xlsx"
 
 banco_de_dados = pd.read_excel(endereco,
                                sheet_name=0)
@@ -77,7 +75,7 @@ print(bd_auxiliar.shape)
 
 print("---")
 print("\nVARIÁVEL(IS):")
-print("")
+# print("")
 
 # sementes = Sementes do BIG Data
 sementes = bd_auxiliar.values
@@ -92,8 +90,13 @@ num_de_variaveis = sementes.shape[1]
 # print(sementes.shape)
 
 # digitar k-clusters;
+num_de_k_inicial = input("\nDigitar o 'Número do k inicial' = ")
+descricao = "Número do k inicial"
+num_de_k_inicial = \
+    vv.validar_variavel_inteira_nao_negativa(num_de_k_inicial, descricao)
+
 # K = Número total de clusters
-K = input("Digitar o 'Número de total de k-clusters' = ")
+K = input("\nDigitar o 'Número de total de k-clusters' = ")
 descricao = "Número de total k-clusters"
 K = vv.validar_variavel_inteira_nao_negativa(K, descricao)
 # Condição para não gerar mais grupos do que elementos
@@ -112,10 +115,7 @@ num_max_I = \
     vv.validar_variavel_inteira_nao_negativa(num_max_I, descricao)
 print("Número máximo de iterações =", num_max_I)
 
-num_de_k_inicial = input("\nDigitar o 'Número do k inicial' = ")
-descricao = "Número do k inicial"
-num_de_k_inicial = \
-    vv.validar_variavel_inteira_nao_negativa(num_de_k_inicial, descricao)
+# Validação do número inicial de k-clusteres:
 if num_de_k_inicial <= 1 or num_de_k_inicial > K:
     print("Espeficique um valor de "
           "'Número do k inicial' maior que 1 (um)"
@@ -145,9 +145,8 @@ for k in range(num_de_k_inicial, K + 1, 1):
     WSs_total_otimo_lista.append(WS_total_otimo)
 
     # RESULTADO(S): ---
-
     print("\n---")
-    print("RESULTADO(S) PARA k =", k, ":")
+    print("RESULTADO(S) PARA k = " + str(k) + ":")
     print("")
 
     # print("Medioides ótimos:")
@@ -161,7 +160,9 @@ for k in range(num_de_k_inicial, K + 1, 1):
                                    banco_de_dados,
                                    distancias_otimas,
                                    ks_min_otimos,
-                                   k)
+                                   k,
+                                   K,
+                                   num_max_I)
 
     # print("")
     # print("WS total ótimo:")
@@ -188,17 +189,19 @@ for k in range(num_de_k_inicial, K + 1, 1):
                                  distancias_otimas,
                                  k,
                                  populacao,
-                                 titulo_do_eixo_x_do_dendrograma)
+                                 titulo_do_eixo_x_do_dendrograma,
+                                 K,
+                                 num_max_I)
     endereco = endereco_antigo
 
 # Plotar o Elbow Data Chart:
-
 ed.gerar_grafico_elbow_data(endereco,
                             num_de_k_inicial,
                             K,
-                            WSs_total_otimo_lista)
+                            WSs_total_otimo_lista,
+                            num_max_I)
 
-# Comenteri para poder ser executado em Sistemas Operacionais Linux:
+# Comentei para poder ser executado também em Sistemas Operacionais Linux:
 # frequencia = 2500 # (Hertz)
 # duracao = 1000 # (ms)
 # winsound.Beep(frequencia, duracao)
@@ -206,9 +209,8 @@ ed.gerar_grafico_elbow_data(endereco,
 print("\n---")
 tempo_fim = time.time() - tempo_inicio
 tempo_final_CPU = time.perf_counter()
-print(f"Tempo de execução: {tempo_fim} segundos")
-print(f"Tempo de execução: {tempo_final_CPU - tempo_inicio_CPU} segundos")
-
+print(f"Tempo de execução: {tempo_fim:.4f} [s]")
+print(f"Tempo de execução: {tempo_final_CPU - tempo_inicio_CPU:.4f} [s]")
 
 # Os objetos estão sendo salvos para NÃO ter que executar
 # todo o código novamente, simplemente para executar
