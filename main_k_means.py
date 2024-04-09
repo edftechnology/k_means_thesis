@@ -94,6 +94,7 @@ num_de_k_inicial = input("\nDigitar o 'Número do k inicial' = ")
 descricao = "Número do k inicial"
 num_de_k_inicial = \
     vv.validar_variavel_inteira_nao_negativa(num_de_k_inicial, descricao)
+print("Número do k Inicial =", num_de_k_inicial)
 
 # K = Número total de clusters
 K = input("\nDigitar o 'Número de total de k-clusters' = ")
@@ -121,7 +122,7 @@ if num_de_k_inicial <= 1 or num_de_k_inicial > K:
           "'Número do k inicial' maior que 1 (um)"
           "e menor que o 'Número Total K de k-clusters'.")
     quit()
-print("Número do k Inicial =", num_de_k_inicial)
+
 
 titulo_do_eixo_x_do_dendrograma = input("\nDigitar o "
                                         "'Título do Eixo x do Dendrograma': ")
@@ -160,6 +161,7 @@ for k in range(num_de_k_inicial, K + 1, 1):
                                    banco_de_dados,
                                    distancias_otimas,
                                    ks_min_otimos,
+                                   num_de_k_inicial,
                                    k,
                                    K,
                                    num_max_I)
@@ -187,6 +189,7 @@ for k in range(num_de_k_inicial, K + 1, 1):
     de.gerar_grafico_dendrograma(endereco,
                                  banco_de_dados,
                                  distancias_otimas,
+                                 num_de_k_inicial,
                                  k,
                                  populacao,
                                  titulo_do_eixo_x_do_dendrograma,
@@ -216,16 +219,16 @@ print(f"Tempo de execução: {tempo_final_CPU - tempo_inicio_CPU:.4f} [s]")
 # todo o código novamente, simplemente para executar
 # a function abaixo
 # Salvar os objetos:
-with open("objetos.pkl", "wb") as f:
-    pkl.dump([endereco,
-              num_de_k_inicial,
-              K,
-              WSs_total_otimo_lista,
-              banco_de_dados,
-              distancias_otimas,
-              populacao,
-              ks_min_otimos],
-             f)
+# with open("objetos.pkl", "wb") as f:
+#     pkl.dump([endereco,
+#               num_de_k_inicial,
+#               K,
+#               WSs_total_otimo_lista,
+#               banco_de_dados,
+#               distancias_otimas,
+#               populacao,
+#               ks_min_otimos],
+#              f)
 
 # REFERÊNCIA(S): ---
 
