@@ -94,7 +94,7 @@ num_de_k_inicial = input("\nDigitar o 'Número do k inicial' = ")
 descricao = "Número do k inicial"
 num_de_k_inicial = \
     vv.validar_variavel_inteira_nao_negativa(num_de_k_inicial, descricao)
-print("Número do k Inicial =", num_de_k_inicial)
+# print("Número do k Inicial =", num_de_k_inicial)
 
 # K = Número total de clusters
 K = input("\nDigitar o 'Número de total de k-clusters' = ")
@@ -107,14 +107,14 @@ if K >= porcentagem * n:
           "'Número Total K de k-clusters' menor que",
           int(porcentagem * n))
     quit()
-print("Número total K de k-clusters =", K)
+# print("Número total K de k-clusters =", K)
 
 # num_max_I = Número máximo de iterações
 num_max_I = input("\nDigitar o 'Número total de iterações' = ")
 descricao = "Número total de iterações"
 num_max_I = \
     vv.validar_variavel_inteira_nao_negativa(num_max_I, descricao)
-print("Número máximo de iterações =", num_max_I)
+# print("Número máximo de iterações =", num_max_I)
 
 # Validação do número inicial de k-clusteres:
 if num_de_k_inicial <= 1 or num_de_k_inicial > K:
@@ -123,9 +123,15 @@ if num_de_k_inicial <= 1 or num_de_k_inicial > K:
           "e menor que o 'Número Total K de k-clusters'.")
     quit()
 
-
 titulo_do_eixo_x_do_dendrograma = input("\nDigitar o "
                                         "'Título do Eixo x do Dendrograma': ")
+
+# populacao = População máxima a ser exibida no gráfico dendrograma
+populacao = input("\nDigitar o 'Número máximo da população a ser exibida no gráfico dendrograma' = ")
+descricao = "Número máximo da população a ser exibida no gráfico dendrograma"
+populacao = \
+    vv.validar_variavel_inteira_nao_negativa(populacao, descricao)
+# print("Número máximo da população a ser exibida no gráfico dendrograma =", populacao)
 
 # CÁLCULO(S): ---
 
@@ -174,10 +180,10 @@ for k in range(num_de_k_inicial, K + 1, 1):
     # Gráfico(s):
 
     # Plotar Dendrograma:
-    if n <= 40:
+    if n <= populacao:
         populacao = n
     else:
-        populacao = 40
+        populacao = 150  # É conveniente que seja um valor próximo de 40
 
     # for populacao in range(2, n + 1, 1): Caso se queira executar
     # o programa para gerar is elbow data charts para cada valor
