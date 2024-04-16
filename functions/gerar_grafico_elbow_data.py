@@ -40,9 +40,6 @@ plt.style.use("seaborn-deep")
 
 plt.rcParams["figure.autolayout"] = True
 
-import numpy as np
-import matplotlib.pyplot as plt
-import os
 from matplotlib.ticker import MaxNLocator
 
 def gerar_grafico_elbow_data(endereco,
