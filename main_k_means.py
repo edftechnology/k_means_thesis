@@ -97,8 +97,8 @@ num_de_k_inicial = \
 # print("Número do k Inicial =", num_de_k_inicial)
 
 # K = Número total de clusters
-K = input("\nDigitar o 'Número de total de k-clusters' = ")
-descricao = "Número de total k-clusters"
+K = input("\nDigitar o 'Número total de k-clusters' = ")
+descricao = "Número total k-clusters"
 K = vv.validar_variavel_inteira_nao_negativa(K, descricao)
 # Condição para não gerar mais grupos do que elementos
 porcentagem = 0.80
