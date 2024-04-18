@@ -23,12 +23,15 @@ import pickle as pkl
 import functions.validacoes_das_variaveis as vv
 import functions.k_means as km
 import functions.gerar_grafico_elbow_data as ed
-import functions.gerar_relatorio_em_planilha as re
+import functions.gerar_relatorio_dos_clusteres as re
 import functions.gerar_grafico_dendrograma as de
 # Comentei para poder ser executado também em Sistemas Operacionais Linux:
 # import winsound as winsound
 
 # CARREGAMENTO, ARMAZENAMENTO E MANIPULAÇÃO DO DADOS: ---
+
+# Caminho para o diretório onde o script está localizado
+script_dir = os.path.dirname(__file__)
 
 # endereco = "databases/tres_ponto_um.xlsx"
 # endereco = "databases/quatro_ponto_um.xlsx"
@@ -36,11 +39,10 @@ import functions.gerar_grafico_dendrograma as de
 # endereco = "databases/aeronaves_civis_sem_data_de_entrada_de_operacao.xlsx"
 # endereco = "databases/aeronaves_civis_arbitrado_sem_data_de_entrada_de_operacao.xlsx"
 # endereco = "databases/aeronaves_militares_sem_data_de_entrada_de_operacao.xlsx"
-# endereco = "databases/aeronaves_militares_arbitrado_sem_data_de_entrada_de_operacao.xlsx"
-# endereco = "databases/turbinas_60_licoes.xlsx"
-# endereco = "databases/foguetes.xlsx"
+endereco = "databases/aeronaves_militares_arbitrado_sem_data_de_entrada_de_operacao.xlsx"
 
-endereco = "databases/.injetores_l25.xlsx"
+# Definindo o caminho completo para salvar o arquivo
+endereco = os.path.join(script_dir, endereco)
 
 banco_de_dados = pd.read_excel(endereco,
                                sheet_name=0)
@@ -126,12 +128,12 @@ if num_de_k_inicial <= 1 or num_de_k_inicial > K:
 titulo_do_eixo_x_do_dendrograma = input("\nDigitar o "
                                         "'Título do Eixo x do Dendrograma': ")
 
-# populacao = População máxima a ser exibida no gráfico dendrograma
-populacao = input("\nDigitar o 'Número máximo da população a ser exibida no gráfico dendrograma' = ")
-descricao = "Número máximo da população a ser exibida no gráfico dendrograma"
+# populacao = População máxima a ser exibida no gráfico Dendrograma
+populacao = input("\nDigitar o 'Número máximo da população a ser exibida no gráfico Dendrograma' = ")
+descricao = "Número máximo da população a ser exibida no gráfico Dendrograma"
 populacao = \
     vv.validar_variavel_inteira_nao_negativa(populacao, descricao)
-# print("Número máximo da população a ser exibida no gráfico dendrograma =", populacao)
+# print("Número máximo da população a ser exibida no gráfico Dendrograma =", populacao)
 
 # CÁLCULO(S): ---
 
@@ -144,8 +146,8 @@ ks_min_otimos_lista = []
 WSs_total_otimo_lista = []
 
 for k in range(num_de_k_inicial, K + 1, 1):
-    distancias_otimas, medioides_otimos, \
-    ks_min_otimos, WS_total_otimo = \
+    [distancias_otimas, medioides_otimos, \
+    ks_min_otimos, WS_total_otimo] = \
         km.k_means(num_de_k_inicial, k, sementes, num_max_I)
     medioides_otimos_lista.append(medioides_otimos)
     ks_min_otimos_lista.append(ks_min_otimos)
@@ -156,21 +158,22 @@ for k in range(num_de_k_inicial, K + 1, 1):
     print("RESULTADO(S) PARA k = " + str(k) + ":")
     print("")
 
-    # print("Medioides ótimos:")
+    # print("Medioides ótimos:\n")
+    # print(medioides_otimos)
     # print(medioides_otimos_lista)
     # print("")
 
-    # Gerar relatório em planilha:
+    # Gerar relatório dos clusteres em planilha:
     endereco = endereco.replace("databases/", "")
     endereco = endereco.replace(".xlsx", "_")
-    re.gerar_relatorio_em_planilha(endereco,
-                                   banco_de_dados,
-                                   distancias_otimas,
-                                   ks_min_otimos,
-                                   num_de_k_inicial,
-                                   k,
-                                   K,
-                                   num_max_I)
+    re.gerar_relatorio_dos_clusteres(endereco,
+                                    banco_de_dados,
+                                    distancias_otimas,
+                                    ks_min_otimos,
+                                    num_de_k_inicial,
+                                    k,
+                                    K,
+                                    num_max_I)
 
     # print("")
     # print("WS total ótimo:")
@@ -182,8 +185,6 @@ for k in range(num_de_k_inicial, K + 1, 1):
     # Plotar Dendrograma:
     if n <= populacao:
         populacao = n
-    else:
-        populacao = 150  # É conveniente que seja um valor próximo de 40
 
     # for populacao in range(2, n + 1, 1): Caso se queira executar
     # o programa para gerar is elbow data charts para cada valor
@@ -219,7 +220,7 @@ print("\n---")
 tempo_fim = time.time() - tempo_inicio
 tempo_final_CPU = time.perf_counter()
 print(f"Tempo de execução: {tempo_fim:.4f} [s]")
-print(f"Tempo de execução: {tempo_final_CPU - tempo_inicio_CPU:.4f} [s]")
+print(f"Tempo de execução (CPU): {tempo_final_CPU - tempo_inicio_CPU:.4f} [s]")
 
 # Os objetos estão sendo salvos para NÃO ter que executar
 # todo o código novamente, simplemente para executar
