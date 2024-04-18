@@ -3,7 +3,7 @@
 
 # <!-- LOGOTIPO DO PROJETO -->
 # <div style="display: flex; justify-content: center;">
-#    <a href="https://github.com/othneildrew/Best-README-Template">
+#    <a href="https://github.com/edendenis/k_means_monography_python">
 #      <img src="figures/logotipo_edf_vetorizado_fundo_roxo_e_nome.png" alt="Logo" width="80" height="80">
 #    </a>
 # </div>
@@ -181,7 +181,7 @@
 #     
 #     - É recomendado o mínimo de `2` ou;
 #     
-#     - Caso queira executar a aplicação para um único k-_cluster_, o número dk `k inicial` será igual o `Número total de k-_clusteres` que será solicitado no Item a seguir.
+#     - Caso queira executar a aplicação para um único k-_cluster_, o número dk `k inicial` será igual o `Número total de k-_clusteres_` que será solicitado no Item a seguir.
 # 
 #     4.2 **Digitar o 'Número total de k-clusters'**: Como por exemplo: `Digitar o 'Número de total de k-clusters' = 20`
 #     
@@ -309,5 +309,11 @@
 # 
 # [22] GRUS, J.. ***Data science do zero***. Rio de Janeiro, 1a ed. edição, 2009.
 # 
-# [23] COMMUNITY. ***Scipy.cluster.hierarchy.dendrogram***. Disponível em: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html>. Acessado em: 2018-
+# [23] COMMUNITY. ***Scipy.cluster.hierarchy.dendrogram***. Disponível em: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html>. Acessado em: 2018.
+# 
+# [24] USER: OTHENEILDREW. ***Best readme template***. Disponível em: <https://github.com/othneildrew/Best-README-Template>. Acessado em: 21/02/2024 11:01
+# 
+# <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
+# 
+
 # 
