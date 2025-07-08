@@ -1,6 +1,10 @@
 <!-- LOGOTIPO DO PROJETO -->
 <div style="display: flex; justify-content: center;">
+<<<<<<< HEAD
    <a href="https://github.com/edendenis/k_means_python">
+=======
+   <a href="https://github.com/edendenis/k_means_monography_python">
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
      <img src="figures/gold_edf_technology_logo_transparent_background_and_gold_name.png" alt="Logo" width="160" height="160">
    </a>
 </div>
@@ -39,7 +43,11 @@ _The computing application for the k-means algorithm is an unsupervised clusteri
 
 Esta seção deve listar todas as principais estruturas/bibliotecas usadas para inicializar seu projeto. Deixe quaisquer complementos/plugins para a seção de agradecimentos. Aqui estão alguns exemplos.
 
+<<<<<<< HEAD
 * [![Python 3.8](https://img.shields.io/badge/Python%203.8-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+=======
+* [![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
 * [![Anaconda](https://img.shields.io/badge/Anaconda-44A833?style=flat-square&logo=anaconda&logoColor=white)](https://www.anaconda.com/)
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
@@ -151,7 +159,11 @@ Lembre-se de proteger sua chave privada e evitar compartilhá-la com outras pess
 
 ## Como executar a aplicação
 
+<<<<<<< HEAD
 1. Abrir o arquivo `main_k_means.ipynb` o qual está com comentários;
+=======
+1. Abrir o arquivo `main_k_means.py` o qual está com comentários;
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
 
 2.Dentro do arquivo `main_k_means.py`, na Seção `Carregamento, armazenamento e manipulação de dados`, alterar o caminho para o banco de dados que deverá ser utilizado para a execução, por exemplo:
 
@@ -164,6 +176,7 @@ Lembre-se de proteger sua chave privada e evitar compartilhá-la com outras pess
 
 ### Executar a partir do `Terminal Emulator`
 
+<<<<<<< HEAD
 1. **Digitar o 'Número do k inicial'**: Como por exemplo: `Digitar o 'Número do k inicial' = 2`
     
     - Trata-se de um número inteiro **NÃO** negativo;
@@ -173,12 +186,35 @@ Lembre-se de proteger sua chave privada e evitar compartilhá-la com outras pess
     - Caso queira executar a aplicação para um único k-_cluster_, o número dk `k inicial` será igual o `Número total de k-_clusteres` que será solicitado no Item a seguir.
 
 2 **Digitar o 'Número total de k-clusters'**: Como por exemplo: `Digitar o 'Número de total de k-clusters' = 20`
+=======
+1. Abra seu `Terminal Emulator`, tanto no `Linux` como no `Windows` irá funcionar
+
+2. Altere o diretório com o comando `cd`, como segue: `cd "caminho/ate/o/repositorio/da/aplicacao/main_k_means.py"`
+
+3. Para executar a aplicação, a sintaxe básica é: `python3.8 main_k_means.py` (a extensão é opcional);
+
+4. No `Terminal Emulator`, serão solicitadas as informações para a execução:
+
+    4.1 **Digitar o 'Número do k inicial'**: Como por exemplo: `Digitar o 'Número do k inicial' = 2`
+    
+    - Trata-se de um número inteiro **NÃO** negativo;
+    
+    - É recomendado o mínimo de `2` ou;
+    
+    - Caso queira executar a aplicação para um único k-_cluster_, o número dk `k inicial` será igual o `Número total de k-_clusteres_` que será solicitado no Item a seguir.
+
+    4.2 **Digitar o 'Número total de k-clusters'**: Como por exemplo: `Digitar o 'Número de total de k-clusters' = 20`
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
     
     - Trata-se de um número inteiro **NÃO** negativo;
     
     - É recomendado um número mínimo, por exemplo, `10`, `15` ou `20` para que `Elbow Data Chart` (Gráfico de Dados de Cotovelo) indique o número de k-_clusteres_ idela que os dados devem ser agrupados. Tudo isso será indicado pela "quina" gerada pelo gráfico, por exemplo.
 
+<<<<<<< HEAD
 3 **Digitar o 'Número total de iterações'**: Como por exemplo: `Digitar o 'Número total de iterações' = 1000`
+=======
+    4.3 **Digitar o 'Número total de iterações'**: Como por exemplo: `Digitar o 'Número total de iterações' = 1000`
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
     
     - Trata-se de um número inteiro **NÃO** negativo;
     
@@ -186,7 +222,11 @@ Lembre-se de proteger sua chave privada e evitar compartilhá-la com outras pess
     
     - Em geral, a aplicação é executada em minutos para a maior parte dos problemas, mas cade ao usuário, ajustar à sua necessidade, mesmo que "perca" na precisão da solução, mas ganhe no custo computacional (tempo).
 
+<<<<<<< HEAD
 4 **Digitar o 'Título do Eixo x do Dendrograma'**: Como por exemplo: `Digitar o 'Título do Eixo x do Dendrograma': Aeronaves militares`
+=======
+    4.4 **Digitar o 'Título do Eixo x do Dendrograma'**: Como por exemplo: `Digitar o 'Título do Eixo x do Dendrograma': Aeronaves militares`
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
 
     - Trata-se de um texto;
 
@@ -304,3 +344,8 @@ Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
 
 <p align="right">(<a href="#readme-top">voltar ao topo</a>)</p>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8f9ea77e354499490b8406602c7fef368de9bcbd
