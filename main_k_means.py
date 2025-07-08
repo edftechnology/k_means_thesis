@@ -1,11 +1,11 @@
 # coding: utf-8
 """
-Fundação Universidade Federal do ABC
+Instituto Tecnológico de Aeronáutica (IRA)
 
-Trabalho de Graduação em Engenharia III
+Trabalho de Graduação (TG) Mestrado em Propulsão Aeroespacial e Energia
 
-Data de Criação: 06/03/2018
-Data da última modificação: 28/09/2018
+Data de Criação: 17/01/2025
+Data da última modificação: Conforme registrado pelo computador.
 """
 # REVISÃO(ÕES): ---
 
@@ -33,7 +33,7 @@ import functions.gerar_grafico_dendrograma as de
 # Caminho para o diretório onde o script está localizado
 script_dir = os.path.dirname(__file__)
 
-endereco = "databases/injetores_l25.xlsx"
+endereco = "inputs/edb-emissions-databank_draft_v29B__web_.xlsx"
 
 # Definindo o caminho completo para salvar o arquivo
 endereco = os.path.join(script_dir, endereco)
@@ -111,7 +111,7 @@ descricao = "Número total de iterações"
 num_max_I = \
     vv.validar_variavel_inteira_nao_negativa(num_max_I, descricao)
 # print("Número máximo de iterações =", num_max_I)
-
+x``
 # Validação do número inicial de k-clusteres:
 if num_de_k_inicial <= 1 or num_de_k_inicial > K:
     print("Espeficique um valor de "
@@ -158,7 +158,7 @@ for k in range(num_de_k_inicial, K + 1, 1):
     # print("")
 
     # Gerar relatório dos clusteres em planilha:
-    endereco = endereco.replace("databases/", "")
+    endereco = endereco.replace("inputs/", "")
     endereco = endereco.replace(".xlsx", "_")
     re.gerar_relatorio_dos_clusteres(endereco,
                                     banco_de_dados,
@@ -188,14 +188,14 @@ for k in range(num_de_k_inicial, K + 1, 1):
         endereco = endereco[:-1]
     endereco_antigo = endereco
     de.gerar_grafico_dendrograma(endereco,
-                                 banco_de_dados,
-                                 distancias_otimas,
-                                 num_de_k_inicial,
-                                 k,
-                                 populacao,
-                                 titulo_do_eixo_x_do_dendrograma,
-                                 K,
-                                 num_max_I)
+                                banco_de_dados,
+                                distancias_otimas,
+                                num_de_k_inicial,
+                                k,
+                                populacao,
+                                titulo_do_eixo_x_do_dendrograma,
+                                K,
+                                num_max_I)
     endereco = endereco_antigo
 
 # Plotar o Elbow Data Chart:
@@ -211,6 +211,7 @@ ed.gerar_grafico_elbow_data(endereco,
 # winsound.Beep(frequencia, duracao)
 
 print("\n---")
+
 tempo_fim = time.time() - tempo_inicio
 tempo_final_CPU = time.perf_counter()
 print(f"Tempo de execução: {tempo_fim:.4f} [s]")

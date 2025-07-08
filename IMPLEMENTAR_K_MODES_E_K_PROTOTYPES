@@ -1,0 +1,18 @@
+https://www.linkedin.com/posts/lhayana_s%C3%B3-se-fala-sobre-k-means-quando-o-assunto-activity-7283612201846804480-Z7gw?utm_source=social_share_send&utm_medium=android_app&utm_campaign=share_via
+
+Só se fala sobre k-means quando o assunto é clusterização. E o objetivo desse post não é falar mal do algoritmo que minimiza a soma das distâncias quadradas entre os pontos de dados e seus centróides, afinal ele é genial. Mas é importante lembrar que, para usar o k-means, todo os seus dados precisam ser numéricos. E não, não vale usar one hot encoding nos categóricos, pois isso irá distorcer as distâncias euclidianas. Então, na vida real, nem sempre iremos conseguir usar o k-means.
+
+O que usar, então? Como uma boa chata, vou responder: depende!
+
+Se seus dados são todos categóricos (como, por exemplo, dados populacionais de gênero, etnia, profissão, etc), você deve utilizar o k-modes, que ao invés de utilizar a média, utiliza a moda como medida central dos clusters.
+
+Mas nem sempre todos os nossos dados são categóricos, muitas vezes há algumas features categóricas e outras numéricas. Se for o seu caso, use o k-prototypes. Esse algoritmo calcula a dissimilaridade de maneira separada para atributos numéricos e categóricos, e depois combina essas dissimilaridades usando uma soma ponderada.
+
+Deixo abaixo alguns artigos para caso queiram se aprofundar um pouco sobre esses algoritmos:
+- K-modes: https://lnkd.in/dnfnpV6k
+- K-prototypes: https://lnkd.in/djsWPTSy
+
+E se você quiser se aprofundar BASTANTE, recomendo essa aula aqui: https://lnkd.in/dCaHyv5T. É excelente e bem completa.
+
+Eu aprendi isso muito tempo depois de ter estudado sobre clusterização pela primeira vez, então resolvi fazer esse artigo, pois acredito que isso é algo que devia ser muito mais abordado do que é atualmente. Espero ter te ajudado!
+
