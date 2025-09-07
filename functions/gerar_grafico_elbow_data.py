@@ -1,3 +1,4 @@
+﻿# -*- coding: utf-8 -*-
 import numpy as np
 import os
 import matplotlib.pyplot as plt
@@ -38,9 +39,10 @@ def gerar_grafico_elbow_data(endereco,
 
     plt.tight_layout()
 
-    # Encontrar o caminho para a pasta 'outputs' dentro de 'k_means'
-    caminho_base = os.path.dirname(endereco)  # Assume que 'endereco' aponta para dentro de 'k_means'
-    pasta_outputs = os.path.join(caminho_base, 'outputs')
+    # Encontrar a raiz do projeto (um nível acima de 'functions')
+    this_dir = os.path.abspath(os.path.dirname(__file__))
+    project_root = os.path.dirname(this_dir)
+    pasta_outputs = os.path.join(project_root, 'outputs')
 
     # Processamento do nome base
     nome_base = os.path.splitext(os.path.basename(endereco))[0].replace("__", "_") + \

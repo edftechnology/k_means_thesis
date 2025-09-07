@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # PACOTE(S): ---
 import numpy as np
 import pandas as pd
@@ -107,9 +108,10 @@ def gerar_grafico_dendrograma(endereco,
     subchart.set_ylabel("Distâncias Ótimas Normalizadas")
     figure.tight_layout()  # Use 'figure' em vez de 'plt' para aplicar tight_layout na figura inteira
 
-    # Encontrar o caminho para a pasta 'outputs' dentro de 'k_means'
-    caminho_base = os.path.dirname(endereco)  # Sobe um nível para 'k_means'
-    pasta_outputs = os.path.join(caminho_base, 'outputs')
+    # Encontrar a raiz do projeto (um nível acima de 'functions')
+    this_dir = os.path.abspath(os.path.dirname(__file__))
+    project_root = os.path.dirname(this_dir)
+    pasta_outputs = os.path.join(project_root, 'outputs')
 
     # Processamento do nome base
     nome_base = os.path.splitext(os.path.basename(endereco))[0].replace("__", "_") + \

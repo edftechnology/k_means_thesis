@@ -1,16 +1,17 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import functions.sortear_sementes as ss
 
 def k_means(num_de_k_inicial, K, sementes, num_max_I):
-    """
+    r"""
+    Executa o algoritmo de k-means e retorna distâncias, centróides e etiquetas.
 
     :param num_de_k_inicial: Número de k inicial. int.
-    :param K: Número total de k-clusters. int
-    :param sementes: Sementes do BIG Data. float.
+    :param K: Número total de k-clusters. int.
+    :param sementes: Matriz de dados (amostras x variáveis). float.
     :param num_max_I: Número máximo de iterações. int.
-    
-    :return: Medioides ótimos, posição mais próxima do 
-    medioide ótimo e WSs total ótimos
+
+    :returns: (distancias_otimas, medioides_otimos, ks_min_otimos, WS_total_otimo)
     """
 
     # I = Iteração
@@ -69,10 +70,10 @@ def k_means(num_de_k_inicial, K, sementes, num_max_I):
 
             num_de_elementos_na_soma[:] = 0
             sortear_novamente = False
-            while num_de_elementos_na_soma.any() == 0:
+            # Enquanto existir algum cluster vazio, reatribuir até todos terem pelo menos 1
+            while (num_de_elementos_na_soma == 0).any():
 
-                if num_de_elementos_na_soma.any() == 0 \
-                        and sortear_novamente == True:
+                if (num_de_elementos_na_soma == 0).any() and sortear_novamente is True:
                     # for k in range(0, K, 1):
                     medioides = ss.sortear_sementes(n, K, sementes)
 
@@ -99,14 +100,17 @@ def k_means(num_de_k_inicial, K, sementes, num_max_I):
                     num_de_elementos_na_soma[k_min] = \
                         num_de_elementos_na_soma[k_min] + 1
 
-                if num_de_elementos_na_soma.any() == 0:
+                if (num_de_elementos_na_soma == 0).any():
                     sortear_novamente = True
 
             # recalcular (média dos pontos aglutinados), novos medioides
             medioides_anteriores = medioides.copy()
             # para todos os $ k $-clusters
             for k in range(0, K, 1):
-                medioides[k] = soma_medioides[k] / num_de_elementos_na_soma[k]
+                # Evitar divisão por zero por segurança (não deveria ocorrer pelo laço acima)
+                if num_de_elementos_na_soma[k] > 0:
+                    medioides[k] = soma_medioides[k] / num_de_elementos_na_soma[k]
+                # Caso raro: manter o centróide anterior
 
             distancias[:] = 0 # Zerar todos os elementos do array
             WSs[:] = 0
@@ -144,10 +148,9 @@ def k_means(num_de_k_inicial, K, sementes, num_max_I):
 
     # calcular a distância entre o elemento e o novo medioide
     for i in range(0, n, 1):
-        # para todos os $ k $-clusters
-        for k in range(0, K, 1):
-            distancias_otimas[i, 0] = \
-                np.linalg.norm(sementes[i] - medioides_otimos[k, 0])
+        # distância do elemento ao centróide do cluster ao qual foi atribuído
+        k_min = int(ks_min_otimos[i, 0])
+        distancias_otimas[i, 0] = np.linalg.norm(sementes[i] - medioides_otimos[k_min])
 
     return distancias_otimas, medioides_otimos, \
            ks_min_otimos, WS_total_otimo
