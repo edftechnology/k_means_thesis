@@ -223,12 +223,18 @@ for k in range(num_de_k_inicial, K + 1, 1):
                                 num_max_I)
     endereco = endereco_antigo
 
-# Plotar o Elbow Data Chart:
-ed.gerar_grafico_elbow_data(endereco,
-                            num_de_k_inicial,
-                            K,
-                            WSs_total_otimo_lista,
-                            num_max_I)
+# Plotar o Elbow Data Chart e salvar relatório com sugestões/índices:
+sugestoes = ed.gerar_grafico_elbow_data(endereco,
+                                        num_de_k_inicial,
+                                        K,
+                                        WSs_total_otimo_lista,
+                                        num_max_I,
+                                        sementes=sementes,
+                                        ks_min_otimos_lista=ks_min_otimos_lista)
+
+print("\nSuggested k (objective detectors):")
+for nome, k_sug in sugestoes.items():
+    print(f"- {nome}: k = {k_sug}")
 
 # Comentei para poder ser executado também em Sistemas Operacionais Linux:
 # frequencia = 2500 # (Hertz)
